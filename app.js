@@ -11,7 +11,7 @@ app.get('/', function(req,res){
   res.render('home');
 });
 
-app.get('/forms', function(req, res){
+app.get('/form', function(req, res){
   res.render('form');
 });
 
