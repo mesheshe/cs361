@@ -1,0 +1,23 @@
+.header{
+    background-color:blue;
+}
+
+.imgContainer{
+    height: 100%;
+    width: 100%;
+}
+
+.contained_img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.jumbotron {
+    background-image: url("/other/img_lights_wide.jpg");
+    background-size: cover;
+  }
+
+.nav-item a:hover{
+    background-color: tan;
+}

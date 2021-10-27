@@ -1,0 +1,54 @@
+<%- include('layouts/main.ejs') %>
+<%- include('partials/header.ejs') %>
+<script src = "js/form.js" > </script>
+
+<div style = "margin:2%">
+<div class = "card">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" id = "1" onclick = "openTab(event, '1')">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id = "2" onclick = "openTab(event, '2')">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id = "3" onclick = "openTab(event, '3')">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+    <div class="card-body">
+        <div class="tabcontent">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <form>
+            <label for="from">From:</label>
+            <input type="text" id="from">
+            <label for="to">To:</label>
+            <input type="text" id="to"><br>
+            <input type = "submit" value = "submit">
+            </form>
+        </div>
+          
+        <div style = "display:none;" class="tabcontent">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
+          
+        <div style = "display:none;" class="tabcontent">
+            <h3>Tokyo</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+        <div style = "display:none;" class="tabcontent">
+            <h3>Tokyo</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d43244.69949747508!2d-122.15239224402623!3d47.35742517887267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e2!4m0!4m5!1s0x54905fa0a1436adb%3A0x354647fe7f414cc2!2sPuerto%20Vallarta%20Family%20Mexican%20Restaurant%2C%2016717%20SE%20272nd%20St%2C%20Covington%2C%20WA%2098042!3m2!1d47.3573664!2d-122.1196415!5e0!3m2!1sen!2sus!4v1635293932781!5m2!1sen!2sus"></iframe>
+</div>
+</div>
