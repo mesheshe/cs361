@@ -1,3 +1,5 @@
+// Remember when making a call to the server use the following link  
+// https://elias-trip-planner.herokuapp.com/
 import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
 
 function drawMap(maplibregl){
@@ -18,15 +20,17 @@ function drawMap(maplibregl){
 }
 
 var map = drawMap(maplibregl);
-var route = [];
+//var route = [];
 
 var sub = document.getElementById("submit2");
+// Optional, we don't really need it, this is just for my case
 
 var addresses = 
 ["42 Fairhaven Commons Way, Fairhaven MA 2719",
 "374 William S Canning Blvd, Fall River MA 2721",
 "121 Worcester Rd, Framingham MA 1701"];
-
+// If you have address, you are going to have to make post calls 
+// Otherwise skip to addMarkerFromLonLatArr(arr) function
 
 // I put it as submit for my project, but 
 // you can even change it to a function if you 
