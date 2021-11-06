@@ -132,6 +132,10 @@ var addresses =
 "374 William S Canning Blvd, Fall River MA 2721",
 "121 Worcester Rd, Framingham MA 1701"];
 
+
+// I put it as submit for my project, but 
+// you can even change it to a function if you 
+// are going to hardcode it
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
     req.open("POST","/getCoord",true);
@@ -144,13 +148,23 @@ sub.addEventListener("click", function(event){
             alert("Error: Invalid Submission")
         }
     })
-    
     var payload = {}
     payload.list = addresses
     console.log("hello")
     req.send(JSON.stringify(payload));
     event.preventDefault()
 });
+//Covert from data 
+//data: Array()
+//   address: "42 Fairhaven Commons Way, Fairhaven MA 2719"
+//   lat: 41.644822149999996
+//   lon: -70.88809189255878
+// to an array of lat and lon
+function dataFromAddressToLonLat(){
+    var arr = [];
+}
+
+
 
 
 
