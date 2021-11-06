@@ -14,7 +14,7 @@ to module, or create a new file with your other js files and import as a module.
 
 For the next following steps, you can follow along by downloading recom.js file in the js file tree.
 
-Step 4: Post the following lines of code to draw a map that you can view and use. 
+Step 4: Post the following lines of code to draw a map that you can view and use in example.js. 
 
 import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
 
