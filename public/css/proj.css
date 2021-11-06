@@ -22,7 +22,7 @@
     background-color: tan;
 }
 
-.airport {
+.icon {
     height: 69px;
     width: 47px;
     background-image: url(https://api.geoapify.com/v1/icon/?scaleFactor=2&color=%2372a2d4&size=small&apiKey=b1f46c812f0f4a7485e46c797622ab4a);

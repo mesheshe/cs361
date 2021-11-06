@@ -21,6 +21,91 @@ var map = drawMap(maplibregl);
 var route = [];
 
 var sub = document.getElementById("submit2");
+
+var addresses = 
+["42 Fairhaven Commons Way, Fairhaven MA 2719",
+"374 William S Canning Blvd, Fall River MA 2721",
+"121 Worcester Rd, Framingham MA 1701"];
+
+
+// I put it as submit for my project, but 
+// you can even change it to a function if you 
+// are going to hardcode it
+sub.addEventListener("click", function(event){
+    var req = new XMLHttpRequest();
+    req.open("POST","/getCoord",true);
+    req.setRequestHeader("Content-Type","application/json")
+    req.addEventListener("load", function(){
+        if (req.status >= 200 && req.status < 400){
+            var response = JSON.parse(req.responseText);
+            dataFromAddressToLonLat(response.data)
+        }else{
+            alert("Error: Invalid Submission")
+        }
+    })
+    var payload = {}
+    payload.list = addresses
+    console.log("hello")
+    req.send(JSON.stringify(payload));
+    event.preventDefault()
+});
+//Covert from data 
+//data: Array()
+//   address: "42 Fairhaven Commons Way, Fairhaven MA 2719"
+//   lat: 41.644822149999996
+//   lon: -70.88809189255878
+// to an array of lat and lon
+function dataFromAddressToLonLat(data){
+    var arr = [];
+    data.forEach(datam => {
+        var sub = [];
+        sub.push(datam.lon)
+        sub.push(datam.lat)
+        arr.push(sub);
+    });
+    addMarkerFromLonLatArr(arr);
+}
+// [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
+function addMarkerFromLonLatArr(arr){
+    // I kept it in terms of i so if you have another array that 
+    // has information about said marker you can still reference it
+    var bounds = new maplibregl.LngLatBounds(); // defines the bounds 
+    for (let i = 0; i < arr.length; i++){
+        var icon = document.createElement('div');
+        icon.classList.add("icon");
+        icon.setAttribute("id", "icon" + i);
+        // This step above allows you to add event handlers for each icon
+        var iconPopup = new maplibregl.Popup({
+            anchor: 'bottom',
+            offset: [0, -64] // height - shadow
+          })
+          .setText('icon text');
+      
+        var iconMarker = new maplibregl.Marker(icon, {
+            anchor: 'bottom',
+            offset: [0, 6]
+        })
+        .setLngLat(arr[i])
+        .setPopup(iconPopup)
+        .addTo(map);
+
+        //map.setCenter(arr[i])
+        icon.onclick = (event) => {
+            // you can add custom logic here. For example, modify popup.
+            iconPopup.setHTML(`<p>${event.target.getAttribute('id')}</p>`);
+            event.stopPropagation();
+          }
+
+          icon.onmouseenter = () => iconMarker.togglePopup(); // show/hide popup on mouse hover
+          icon.onmouseleave = () => iconMarker.togglePopup();
+
+          
+          bounds.extend(arr[i]);
+    }
+    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+}
+
+
 /*
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
@@ -40,7 +125,7 @@ sub.addEventListener("click", function(event){
     //req.send(JSON.stringify(payload));
     event.preventDefault()
 });
-*/
+
 function buildCoord(data){
     route = []
     console.log("done")
@@ -126,51 +211,7 @@ function buildCoord(data){
     });
 
 }
-
-var addresses = 
-["42 Fairhaven Commons Way, Fairhaven MA 2719",
-"374 William S Canning Blvd, Fall River MA 2721",
-"121 Worcester Rd, Framingham MA 1701"];
-
-
-// I put it as submit for my project, but 
-// you can even change it to a function if you 
-// are going to hardcode it
-sub.addEventListener("click", function(event){
-    var req = new XMLHttpRequest();
-    req.open("POST","/getCoord",true);
-    req.setRequestHeader("Content-Type","application/json")
-    req.addEventListener("load", function(){
-        if (req.status >= 200 && req.status < 400){
-            var response = JSON.parse(req.responseText);
-            dataFromAddressToLonLat(response)
-        }else{
-            alert("Error: Invalid Submission")
-        }
-    })
-    var payload = {}
-    payload.list = addresses
-    console.log("hello")
-    req.send(JSON.stringify(payload));
-    event.preventDefault()
-});
-//Covert from data 
-//data: Array()
-//   address: "42 Fairhaven Commons Way, Fairhaven MA 2719"
-//   lat: 41.644822149999996
-//   lon: -70.88809189255878
-// to an array of lat and lon
-function dataFromAddressToLonLat(response){
-    var arr = [];
-    response.forEach(data => {
-        var sub = [];
-        sub.push(data.lon)
-        sub.push(data.lat)
-        arr.push(sub);
-    });
-    console.log(arr)
-}
-
+*/
 
 
 
