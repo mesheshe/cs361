@@ -143,7 +143,7 @@ sub.addEventListener("click", function(event){
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
             var response = JSON.parse(req.responseText);
-            console.log(response);
+            dataFromAddressToLonLat(response)
         }else{
             alert("Error: Invalid Submission")
         }
@@ -160,8 +160,15 @@ sub.addEventListener("click", function(event){
 //   lat: 41.644822149999996
 //   lon: -70.88809189255878
 // to an array of lat and lon
-function dataFromAddressToLonLat(){
+function dataFromAddressToLonLat(response){
     var arr = [];
+    response.forEach(data => {
+        var sub = [];
+        sub.push(data.lon)
+        sub.push(data.lat)
+        arr.push(sub);
+    });
+    console.log(arr)
 }
 
 
