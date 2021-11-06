@@ -5,8 +5,8 @@ function drawMap(maplibregl){
     const map = new maplibregl.Map({
     container: "my-map",
     style: `https://maps.geoapify.com/v1/styles/osm-carto/style.json?apiKey=${mapTilerKey}`,
-    center: [-96.359233, 38.91302],
-    zoom: 2.4
+    center: [-122.483696, 37.833818],
+    zoom: 5
     })
     
 
@@ -20,77 +20,30 @@ function drawMap(maplibregl){
 var map = drawMap(maplibregl);
 var route = [];
 
-function openTab(event, opt){
-    var i, tabcontent, tabs, starts, ends;
-    tabcontent = document.getElementsByClassName('tabcontent');
-    tabs = document.getElementsByClassName("nav-link");
-    if (event.currentTarget.className == "nav-link active"){return;}
-    if (parseInt(opt) <= 3){
-        starts = 0;
-        ends = 3;
-    }else{
-        starts = 3;
-        ends = tabcontent.length;
-    }
-    console.log(starts, ends);
-    for (i = starts; i < ends; i++){
-        tabcontent[i].style.display = "none";
-    }
-    tabcontent[parseInt(opt)-1].style.display = "block";  
-    // We are adding plus 3 because the header also has elements with 
-    // attribute nav-link, therefore need to offset to fix the issue.
-    for (i = starts + 3; i< ends + 3; i++){
-        if (tabs[i].getAttribute("class") == "nav-link active")
-            tabs[i].setAttribute("class", "nav-link");
-    }
-    event.currentTarget.className += " active";
-}
-
-var sub = document.getElementById("submit1");
-
-
+var sub = document.getElementById("submit2");
+/*
 sub.addEventListener("click", function(event){
-    var tos = document.getElementById("to");
-    var froms = document.getElementById("from");
-    var to  = {};
-    var from = {};
     var req = new XMLHttpRequest();
-    var payload = {to:null, from:null};
-    if (tos.value != ""){
-        payload.to = tos.value;
-    }else{
-        to.city = "Seattle";
-        to.state = "WA";
-        payload.to = to;    
-    }
-    if (froms.value != ""){
-        payload.from = froms.value;
-    }else{
-        from.city = "Los Angles";
-        from.state = "CA";
-        payload.from = from;
-    }
-    req.open("POST","/getMaps",true);
+    req.open("POST","/getRoutes",true);
     req.setRequestHeader("Content-Type","application/json")
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
             var response = JSON.parse(req.responseText);
-            console.log(response);
             buildCoord(response);
         }else{
             alert("Error: Invalid Submission")
         }
     })
-    //console.log(payload);
-    req.send(JSON.stringify(payload));
-    event.preventDefault();
     
+    var payload = {}
+    console.log("hello")
+    //req.send(JSON.stringify(payload));
+    event.preventDefault()
 });
-
-
-
+*/
 function buildCoord(data){
-    var route = []
+    route = []
+    console.log("done")
     var storage = data.features[0].geometry.coordinates;
     for (var i = 0; i < storage.length; i++){
         for (var j = 0; j < storage[i].length; j++){
@@ -173,3 +126,31 @@ function buildCoord(data){
     });
 
 }
+
+var addresses = 
+["42 Fairhaven Commons Way, Fairhaven MA 2719",
+"374 William S Canning Blvd, Fall River MA 2721",
+"121 Worcester Rd, Framingham MA 1701"];
+
+sub.addEventListener("click", function(event){
+    var req = new XMLHttpRequest();
+    req.open("POST","/getCoord",true);
+    req.setRequestHeader("Content-Type","application/json")
+    req.addEventListener("load", function(){
+        if (req.status >= 200 && req.status < 400){
+            var response = JSON.parse(req.responseText);
+            console.log(response);
+        }else{
+            alert("Error: Invalid Submission")
+        }
+    })
+    
+    var payload = {}
+    payload.list = addresses
+    console.log("hello")
+    req.send(JSON.stringify(payload));
+    event.preventDefault()
+});
+
+
+
