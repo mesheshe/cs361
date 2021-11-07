@@ -8,7 +8,6 @@ function drawMap(maplibregl){
     center: [-96.359233, 38.91302],
     zoom: 2.4
     })
-    
 
     map.addControl(
     new maplibregl.GeolocateControl({
@@ -19,33 +18,7 @@ function drawMap(maplibregl){
 
 var map = drawMap(maplibregl);
 
-function openTab(event, opt){
-    var i, tabcontent, tabs, starts, ends;
-    tabcontent = document.getElementsByClassName('tabcontent');
-    tabs = document.getElementsByClassName("nav-link");
-    if (event.currentTarget.className == "nav-link active"){return;}
-    if (parseInt(opt) <= 3){
-        starts = 0;
-        ends = 3;
-    }else{
-        starts = 3;
-        ends = tabcontent.length;
-    }
-    for (i = starts; i < ends; i++){
-        tabcontent[i].style.display = "none";
-    }
-    tabcontent[parseInt(opt)-1].style.display = "block";  
-    // We are adding plus 3 because the header also has elements with 
-    // attribute nav-link, therefore need to offset to fix the issue.
-    for (i = starts + 3; i< ends + 3; i++){
-        if (tabs[i].getAttribute("class") == "nav-link active")
-            tabs[i].setAttribute("class", "nav-link");
-    }
-    event.currentTarget.className += " active";
-}
-
 var sub = document.getElementById("submit1");
-
 
 sub.addEventListener("click", function(event){
     var tos = document.getElementById("to");
@@ -85,8 +58,6 @@ sub.addEventListener("click", function(event){
     
 });
 
-
-
 function buildCoord(data){
     var route = []
     var storage = data.features[0].geometry.coordinates;
@@ -99,6 +70,7 @@ function buildCoord(data){
     }   
 
     var bounds = new maplibregl.LngLatBounds();
+
     route.forEach(element => bounds.extend(element))
     map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
     
@@ -133,7 +105,6 @@ function buildCoord(data){
       }
     });
 }
-
 
 // [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
 function addMarkerFromLonLatArr(arr){

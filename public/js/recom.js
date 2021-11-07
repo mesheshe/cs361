@@ -37,7 +37,7 @@ var addresses =
 // are going to hardcode it
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
-    req.open("POST","/getCoord",true);
+    req.open("POST","https://elias-trip-planner.herokuapp.com/getCoord",true);
     req.setRequestHeader("Content-Type","application/json")
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
@@ -106,14 +106,14 @@ function addMarkerFromLonLatArr(arr){
           
           bounds.extend(arr[i]);
     }
-    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+    map.fitBounds(bounds,{padding: {top: 100, bottom: 50, left: 25, right: 25}});
 }
 
 
 /*
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
-    req.open("POST","/getRoutes",true);
+    req.open("POST","https://elias-trip-planner.herokuapp.com/getRoutes",true);
     req.setRequestHeader("Content-Type","application/json")
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
@@ -131,8 +131,7 @@ sub.addEventListener("click", function(event){
 });
 
 function buildCoord(data){
-    route = []
-    console.log("done")
+    var route = []
     var storage = data.features[0].geometry.coordinates;
     for (var i = 0; i < storage.length; i++){
         for (var j = 0; j < storage[i].length; j++){
@@ -140,80 +139,42 @@ function buildCoord(data){
                 route.push(storage[i][j]);
             }
         }
+    }   
+
+    var bounds = new maplibregl.LngLatBounds();
+    route.forEach(element => bounds.extend(element))
+    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+    
+    if (map.getLayer('route') != undefined){
+      map.removeLayer('route');
+      map.removeSource('route');
     }
+    
+    addMarkerFromLonLatArr([route[0], route[route.length - 1]])
 
-    
-    var airportIcon = document.createElement('div');
-    var airport2Icon = document.createElement('div');
-    airportIcon.classList.add("airport");
-    airport2Icon.classList.add("airport");
-
-    var airportPopup = new maplibregl.Popup({
-        anchor: 'bottom',
-        offset: [0, -64] // height - shadow
-      })
-      .setText('Zürich Airport');
-    
-    var airport = new maplibregl.Marker(airportIcon, {
-        anchor: 'bottom',
-        offset: [0, 6]
-    })
-    .setLngLat(route[0])
-    .setPopup(airportPopup)
-    .addTo(map);
-
-    var airport2 = new maplibregl.Marker(airport2Icon, {
-        anchor: 'bottom',
-        offset: [0, 6]
-    })
-    .setLngLat(route[route.length - 1])
-    .setPopup(airportPopup)
-    .addTo(map);
-    
-    
-    map.setCenter(route[0])
-    airportIcon.onclick = (event) => {
-        // you can add custom logic here. For example, modify popup.
-        airportPopup.setHTML("<h3>I'm clicked!</h3>");
+    map.addLayer({
+      "id": "route",
+      "type": "line", 
+      'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+      },
+      'paint': {
+          'line-color': 'black',
+          'line-width': 8
+      },
+      "source": {
+          "type": "geojson",
+          "data": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                  "type": "LineString",
+                  "coordinates": route
+              }
+          }
       }
-      
-      airportIcon.onmouseenter = () => airport.togglePopup(); // show/hide popup on mouse hover
-      airportIcon.onmouseleave = () => airport.togglePopup();
-
-      var bounds = new maplibregl.LngLatBounds();
-      route.forEach(element => bounds.extend(element))
-      map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
-      
-      if (map.getLayer('route') != undefined){
-        map.removeLayer('route');
-        map.removeSource('route');
-      }
-    
-
-      map.addLayer({
-        "id": "route",
-        "type": "line", 
-        'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-        },
-        'paint': {
-            'line-color': 'black',
-            'line-width': 8
-        },
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": route
-                }
-            }
-        }
     });
-
 }
 */
 
