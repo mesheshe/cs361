@@ -18,7 +18,6 @@ function drawMap(maplibregl){
 }
 
 var map = drawMap(maplibregl);
-var route = [];
 
 function openTab(event, opt){
     var i, tabcontent, tabs, starts, ends;
@@ -32,7 +31,6 @@ function openTab(event, opt){
         starts = 3;
         ends = tabcontent.length;
     }
-    console.log(starts, ends);
     for (i = starts; i < ends; i++){
         tabcontent[i].style.display = "none";
     }
@@ -98,78 +96,81 @@ function buildCoord(data){
                 route.push(storage[i][j]);
             }
         }
+    }   
+
+    var bounds = new maplibregl.LngLatBounds();
+    route.forEach(element => bounds.extend(element))
+    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+    
+    if (map.getLayer('route') != undefined){
+      map.removeLayer('route');
+      map.removeSource('route');
     }
+    
+    addMarkerFromLonLatArr([route[0], route[route.length - 1]])
 
-    
-    var airportIcon = document.createElement('div');
-    var airport2Icon = document.createElement('div');
-    airportIcon.classList.add("airport");
-    airport2Icon.classList.add("airport");
-
-    var airportPopup = new maplibregl.Popup({
-        anchor: 'bottom',
-        offset: [0, -64] // height - shadow
-      })
-      .setText('Zürich Airport');
-    
-    var airport = new maplibregl.Marker(airportIcon, {
-        anchor: 'bottom',
-        offset: [0, 6]
-    })
-    .setLngLat(route[0])
-    .setPopup(airportPopup)
-    .addTo(map);
-
-    var airport2 = new maplibregl.Marker(airport2Icon, {
-        anchor: 'bottom',
-        offset: [0, 6]
-    })
-    .setLngLat(route[route.length - 1])
-    .setPopup(airportPopup)
-    .addTo(map);
-    
-    
-    map.setCenter(route[0])
-    airportIcon.onclick = (event) => {
-        // you can add custom logic here. For example, modify popup.
-        airportPopup.setHTML("<h3>I'm clicked!</h3>");
+    map.addLayer({
+      "id": "route",
+      "type": "line", 
+      'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+      },
+      'paint': {
+          'line-color': 'black',
+          'line-width': 8
+      },
+      "source": {
+          "type": "geojson",
+          "data": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                  "type": "LineString",
+                  "coordinates": route
+              }
+          }
       }
-      
-      airportIcon.onmouseenter = () => airport.togglePopup(); // show/hide popup on mouse hover
-      airportIcon.onmouseleave = () => airport.togglePopup();
-
-      var bounds = new maplibregl.LngLatBounds();
-      route.forEach(element => bounds.extend(element))
-      map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
-      
-      if (map.getLayer('route') != undefined){
-        map.removeLayer('route');
-        map.removeSource('route');
-      }
-    
-
-      map.addLayer({
-        "id": "route",
-        "type": "line", 
-        'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-        },
-        'paint': {
-            'line-color': 'black',
-            'line-width': 8
-        },
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": route
-                }
-            }
-        }
     });
+}
 
+
+// [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
+function addMarkerFromLonLatArr(arr){
+    // I kept it in terms of i so if you have another array that 
+    // has information about said marker you can still reference it
+    let bounds = new maplibregl.LngLatBounds(); // defines the bounds 
+    for (let i = 0; i < arr.length; i++){
+        let icon = document.createElement('div');
+        icon.classList.add("icon");
+        icon.setAttribute("id", "icon" + i);
+        // This step above allows you to add event handlers for each icon
+        let iconPopup = new maplibregl.Popup({
+            anchor: 'bottom',
+            offset: [0, -64] // height - shadow
+          })
+          .setText('icon text');
+      
+        let iconMarker = new maplibregl.Marker(icon, {
+            anchor: 'bottom',
+            offset: [0, 6]
+        })
+        .setLngLat(arr[i])
+        .setPopup(iconPopup)
+        .addTo(map);
+
+        //map.setCenter(arr[i])
+        icon.onclick = (event) => {
+            // you can add custom logic here. For example, modify popup.
+            iconPopup.setHTML(`<p>${event.target.getAttribute('id')}</p>`);
+            event.stopPropagation();
+          }
+
+          icon.onmouseenter = () => iconMarker.togglePopup(); // show/hide popup on mouse hover
+          icon.onmouseleave = () => iconMarker.togglePopup();
+
+          
+          bounds.extend(arr[i]);
+    }
+    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
 }

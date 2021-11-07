@@ -73,19 +73,19 @@ function dataFromAddressToLonLat(data){
 function addMarkerFromLonLatArr(arr){
     // I kept it in terms of i so if you have another array that 
     // has information about said marker you can still reference it
-    var bounds = new maplibregl.LngLatBounds(); // defines the bounds 
+    let bounds = new maplibregl.LngLatBounds(); // defines the bounds 
     for (let i = 0; i < arr.length; i++){
-        var icon = document.createElement('div');
+        let icon = document.createElement('div');
         icon.classList.add("icon");
         icon.setAttribute("id", "icon" + i);
         // This step above allows you to add event handlers for each icon
-        var iconPopup = new maplibregl.Popup({
+        let iconPopup = new maplibregl.Popup({
             anchor: 'bottom',
             offset: [0, -64] // height - shadow
           })
           .setText('icon text');
       
-        var iconMarker = new maplibregl.Marker(icon, {
+        let iconMarker = new maplibregl.Marker(icon, {
             anchor: 'bottom',
             offset: [0, 6]
         })
