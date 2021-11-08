@@ -20,7 +20,6 @@ function drawMap(maplibregl){
 }
 
 var map = drawMap(maplibregl);
-//var route = [];
 
 var sub = document.getElementById("submit2");
 // Optional, we don't really need it, this is just for my case
@@ -53,6 +52,7 @@ sub.addEventListener("click", function(event){
     req.send(JSON.stringify(payload));
     event.preventDefault()
 });
+
 //Covert from data 
 //data: Array()
 //   address: "42 Fairhaven Commons Way, Fairhaven MA 2719"
@@ -107,13 +107,13 @@ function addMarkerFromLonLatArr(arr){
           bounds.extend(arr[i]);
     }
     map.fitBounds(bounds,{padding: {top: 100, bottom: 50, left: 25, right: 25}});
+    
 }
-
 
 /*
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
-    req.open("POST","https://elias-trip-planner.herokuapp.com/getRoutes",true);
+    req.open("POST","/getRoutes",true);
     req.setRequestHeader("Content-Type","application/json")
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
