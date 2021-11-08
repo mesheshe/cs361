@@ -53,6 +53,7 @@ app.post('/getMaps', function(req,res){
 });
 
 app.post('/getCoord', function(req, res){
+  /*
   console.log(req.body.list)
   var payload = {};
   var data = [];
@@ -90,7 +91,8 @@ app.post('/getCoord', function(req, res){
     });
     res.send(JSON.stringify(payload));
   }
-
+  */
+  res.send(req.body);
 });
 
 app.use(function(req,res){
