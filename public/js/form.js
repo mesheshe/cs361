@@ -125,7 +125,7 @@ sub.addEventListener("click", function(event){
 });
 
 async function populatePark(){
-    const response = await fetch('http://flip2.engr.oregonstate.edu:8050/all');
+    const response = await fetch('https://flip2.engr.oregonstate.edu:8050/all');
     const parkData = await response.json();
     // Filter the list 
     let container = document.getElementsByClassName('containers');
