@@ -141,12 +141,13 @@ async function populatePark(){
         button.setAttribute('class', 'btn btn-primary');
         button.textContent = 'Place Marker';
         button.addEventListener('click', function(event){
-            addMarkerFromLonLatArr([[parkData[key].Longitude, parkData[key].Latitude]])
+            addMarkerFromLonLatArr([[parkData[key].Longitude, parkData[key].Latitude]], [key])
+            document.getElementById('my-map').scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
         })
         content.innerHTML = 
-        `${key} is located at ${parkData[key].State} at longitude ${parkData[key].Longitude} and latitude ${parkData[key].Latitude}. \n`+
-        `This park was established in ${parkData[key].Date_Established} with an area of ${parkData[key].Area}, and a yearly visitors \n`+
-        `count of ${parkData[key].Visitors}. For more info, visit ${parkData[key].Website}.`;
+        `${key} is located at ${parkData[key].State} at longitude ${parkData[key].Longitude} and latitude ${parkData[key].Latitude}. <br>`+
+        `This park was established in ${parkData[key].Date_Established} covering an area of ${parkData[key].Area} km^2, with a yearly visitors <br>`+
+        `count of ${parkData[key].Visitors}. For more info, visit <a target="_blank" href ="${parkData[key].Website}">here</a>.`;
         card.setAttribute('class', 'card');
         cardBody.setAttribute('class', 'card-body');
         tabContent.setAttribute('class','tabcontent');
@@ -208,7 +209,7 @@ function buildCoord(data){
 }
 
 // [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
-function addMarkerFromLonLatArr(arr){
+function addMarkerFromLonLatArr(arr, arr2 = false){
     // I kept it in terms of i so if you have another array that 
     // has information about said marker you can still reference it
      
@@ -220,9 +221,11 @@ function addMarkerFromLonLatArr(arr){
         let iconPopup = new maplibregl.Popup({
             anchor: 'bottom',
             offset: [0, -64] // height - shadow
-          })
-          .setText('icon text');
-      
+          });
+        if (arr2){
+            iconPopup.setText(`${arr2[i]}`);   
+        }
+
         let iconMarker = new maplibregl.Marker(icon, {
             anchor: 'bottom',
             offset: [0, 6]
@@ -232,11 +235,11 @@ function addMarkerFromLonLatArr(arr){
         .addTo(map);
 
         //map.setCenter(arr[i])
-        icon.onclick = (event) => {
-            // you can add custom logic here. For example, modify popup.
-            iconPopup.setHTML(`<p>${event.target.getAttribute('id')}</p>`);
-            event.stopPropagation();
-          }
+        //icon.onclick = (event) => {
+        //    // you can add custom logic here. For example, modify popup.
+        //    iconPopup.setHTML(`<p>${event.target.getAttribute('id')}</p>`);
+        //    event.stopPropagation();
+        //}
 
           icon.onmouseenter = () => iconMarker.togglePopup(); // show/hide popup on mouse hover
           icon.onmouseleave = () => iconMarker.togglePopup();
