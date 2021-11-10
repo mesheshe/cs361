@@ -1,3 +1,9 @@
+//temp
+const fs = require('fs');
+const data = fs.readFileSync('parks.json');
+const parks = JSON.parse(data);
+//temp
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -90,6 +96,16 @@ app.post('/getCoord', function(req, res){
     res.send(JSON.stringify(payload));
   }
 });
+
+//temp
+// Send all parks
+app.get('/all/', sendAll);
+
+function sendAll(request, response) {
+    response.send(parks);
+}
+//temp
+
 
 app.use(function(req,res){
     res.status(404);

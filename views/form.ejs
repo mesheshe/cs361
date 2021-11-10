@@ -6,17 +6,17 @@
   <div class = "card">
       <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" id = "1" onclick = "openTab(event, '1')">Active</a>
+            <a class="nav-link active" id = "4">Active</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id = "2" onclick = "openTab(event, '2')">Link</a>
+            <a class="nav-link" id = "5">Link</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id = "3" onclick = "openTab(event, '3')">Link</a>
+            <a class="nav-link" id = "6">Link</a>
           </li>
       </ul>
       <div class="card-body">
-          <div class="tabcontent">
+          <div class= "containers">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <form>
@@ -28,12 +28,12 @@
               </form>
           </div>
 
-          <div style = "display:none;" class="tabcontent">
+          <div style = "display:none;" class="containers">
               <h3>Paris</h3>
               <p>Paris is the capital of France.</p>
           </div>
 
-          <div style = "display:none;" class="tabcontent">
+          <div style = "display:none;" class="containers">
               <h3>Tokyo</h3>
               <p>Tokyo is the capital of Japan.</p>
           </div>
@@ -45,23 +45,29 @@
   <br>
   <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" id = "4" onclick = "openTab(event, '4')">Active</a>
+        <a class="nav-link active" id = "7">Active</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id = "5" onclick = "openTab(event, '5')">Link</a>
+        <a class="nav-link" id = "8">Link</a>
       </li>
   </ul>
-  <div style="margin:2%;margin-bottom:0%;">
+  <div class = "containers" style="margin:2%;margin-bottom:0%;">
+  </div>
+  <div class = "containers" style="margin:2%;margin-bottom:0%;display: none;">
     <div class = "card">
       <div class = "card-body">
         <div class="tabcontent">
           <h3>Mt Rainer</h3>
           <p>Cool place to climb, picture would be here if it existed.</p>
         </div>
-        <div style = "display:none;" class="tabcontent">
-          <h3>Bokyo</h3>
-          <p>Bokyo is the capital of Japan.</p>
-        </div>
+      </div>
+  </div>
+  <br>
+  <div class = "card">
+    <div class = "card-body">
+      <div class="tabcontent">
+        <h3>Bokyo</h3>
+        <p>Bokyo is the capital of Japan.</p>
       </div>
     </div>
   </div>

@@ -1,0 +1,569 @@
+{
+    "Denali": {
+      "State": "Alaska",
+      "Latitude": 63.097595,
+      "Longitude": -151.187402,
+      "Date_Established": "February 26, 1917",
+      "Area": "19,185.8",
+      "Visitors": "601,152",
+      "Website": "https://www.nps.gov/dena/index.htm"
+    },
+    "Gates of the Arctic": {
+      "State": "Alaska",
+      "Latitude": 67.867944,
+      "Longitude": -153.213442,
+      "Date_Established": "December 2, 1980",
+      "Area": "30,448.1",
+      "Visitors": "10,518",
+      "Website": "https://www.nps.gov/gaar/index.htm"
+    },
+    "Glacier Bay": {
+      "State": "Alaska",
+      "Latitude": 58.613727,
+      "Longitude": -136.841242,
+      "Date_Established": "December 2, 1980",
+      "Area": "13,044.6",
+      "Visitors": "672,087",
+      "Website": "https://www.nps.gov/glba/index.htm"
+    },
+    "Katmai": {
+      "State": "Alaska",
+      "Latitude": 58.610206,
+      "Longitude": -155.070656,
+      "Date_Established": "December 2, 1980",
+      "Area": "14,870.3",
+      "Visitors": "84,167",
+      "Website": "https://www.nps.gov/katm/index.htm"
+    },
+    "Kenai Fjords": {
+      "State": "Alaska",
+      "Latitude": 59.843258,
+      "Longitude": -150.191176,
+      "Date_Established": "December 2, 1980",
+      "Area": "2,710.0",
+      "Visitors": "356,601",
+      "Website": "https://www.nps.gov/kefj/index.htm"
+    },
+    "Kobuk Valley": {
+      "State": "Alaska",
+      "Latitude": 67.332592,
+      "Longitude": -159.127815,
+      "Date_Established": "December 2, 1980",
+      "Area": "7,084.9",
+      "Visitors": "15,766",
+      "Website": "https://www.nps.gov/kova/index.htm"
+    },
+    "Lake Clark": {
+      "State": "Alaska",
+      "Latitude": 60.406263,
+      "Longitude": -154.326849,
+      "Date_Established": "December 2, 1980",
+      "Area": "10,602.0",
+      "Visitors": "17,157",
+      "Website": "https://www.nps.gov/lacl/index.htm"
+    },
+    "Wrangell - St. Elias": {
+      "State": "Alaska",
+      "Latitude": 61.700025,
+      "Longitude": -142.983326,
+      "Date_Established": "December 2, 1980",
+      "Area": "33,682.6",
+      "Visitors": "74,518",
+      "Website": "https://www.nps.gov/wrst/index.htm"
+    },
+    "American Samoa": {
+      "State": "American Samoa",
+      "Latitude": -14.258294,
+      "Longitude": -170.683657,
+      "Date_Established": "October 31, 1988",
+      "Area": 33.4,
+      "Visitors": "60,006",
+      "Website": "https://www.nps.gov/npsa/index.htm"
+    },
+    "Grand Canyon": {
+      "State": "Arizona",
+      "Latitude": 36.097756,
+      "Longitude": -112.112666,
+      "Date_Established": "February 26, 1919",
+      "Area": "4,862.9",
+      "Visitors": "5,974,411",
+      "Website": "https://www.nps.gov/grca/index.htm"
+    },
+    "Petrified Forest": {
+      "State": "Arizona",
+      "Latitude": 35.065849,
+      "Longitude": -109.782404,
+      "Date_Established": "December 9, 1962",
+      "Area": 895.9,
+      "Visitors": "643,588",
+      "Website": "https://www.nps.gov/pefo/index.htm"
+    },
+    "Saguaro": {
+      "State": "Arizona",
+      "Latitude": 32.296465,
+      "Longitude": -111.166602,
+      "Date_Established": "October 14, 1994",
+      "Area": 375.8,
+      "Visitors": "1,020,226",
+      "Website": "https://www.nps.gov/sagu/index.htm"
+    },
+    "Hot Springs": {
+      "State": "Arkansas",
+      "Latitude": 34.532203,
+      "Longitude": -93.06514,
+      "Date_Established": "March 4, 1921",
+      "Area": 22.5,
+      "Visitors": "1,467,153",
+      "Website": "https://www.nps.gov/hosp/index.htm"
+    },
+    "Channel Islands": {
+      "State": "California",
+      "Latitude": 34.013289,
+      "Longitude": -119.786562,
+      "Date_Established": "March 5, 1980",
+      "Area": "1,009.9",
+      "Visitors": "409,630",
+      "Website": "https://www.nps.gov/chis/index.htm"
+    },
+    "Death Valley": {
+      "State": "California",
+      "Latitude": 36.495474,
+      "Longitude": -117.08391,
+      "Date_Established": "October 31, 1994",
+      "Area": "13,793.3",
+      "Visitors": "1,740,945",
+      "Website": "https://www.nps.gov/deva/index.htm"
+    },
+    "Joshua Tree": {
+      "State": "California",
+      "Latitude": 33.872302,
+      "Longitude": -115.899165,
+      "Date_Established": "October 31, 1994",
+      "Area": "3,217.9",
+      "Visitors": "2,988,547",
+      "Website": "https://www.nps.gov/jotr/index.htm"
+    },
+    "Kings Canyon": {
+      "State": "California",
+      "Latitude": 36.883792,
+      "Longitude": -118.566104,
+      "Date_Established": "March 4, 1940",
+      "Area": "1,869.2",
+      "Visitors": "632,110",
+      "Website": "https://www.nps.gov/seki/index.htm"
+    },
+    "Lassen Volcanic": {
+      "State": "California",
+      "Latitude": 40.494536,
+      "Longitude": -121.426723,
+      "Date_Established": "August 9, 1916",
+      "Area": 431.4,
+      "Visitors": "517,039",
+      "Website": "https://www.nps.gov/lavo/index.htm"
+    },
+    "Pinnacles": {
+      "State": "California",
+      "Latitude": 36.488702,
+      "Longitude": -121.185028,
+      "Date_Established": "January 10, 2013",
+      "Area": 108,
+      "Visitors": "177,224",
+      "Website": "https://www.nps.gov/pinn/index.htm"
+    },
+    "Redwood": {
+      "State": "California",
+      "Latitude": 41.213671,
+      "Longitude": -124.00611,
+      "Date_Established": "October 2, 1968",
+      "Area": 562.5,
+      "Visitors": "504,722",
+      "Website": "https://www.nps.gov/redw/index.htm"
+    },
+    "Sequoia": {
+      "State": "California",
+      "Latitude": 36.479288,
+      "Longitude": -118.571046,
+      "Date_Established": "September 25, 1890",
+      "Area": "1,635.2",
+      "Visitors": "1,246,053",
+      "Website": "https://www.nps.gov/seki/index.htm"
+    },
+    "Yosemite": {
+      "State": "California",
+      "Latitude": 37.860656,
+      "Longitude": -119.553971,
+      "Date_Established": "October 1, 1890",
+      "Area": "3,082.7",
+      "Visitors": "4,422,861",
+      "Website": "https://www.nps.gov/yose/index.htm"
+    },
+    "Black Canyon of the Gunnison": {
+      "State": "Colorado",
+      "Latitude": 38.573703,
+      "Longitude": -107.74342,
+      "Date_Established": "October 21, 1999",
+      "Area": 124.6,
+      "Visitors": "432,818",
+      "Website": "https://www.nps.gov/blca/index.htm"
+    },
+    "Great Sand Dunes": {
+      "State": "Colorado",
+      "Latitude": 37.785542,
+      "Longitude": -105.616176,
+      "Date_Established": "September 24, 2004",
+      "Area": 434.4,
+      "Visitors": "527,546",
+      "Website": "https://www.nps.gov/grsa/index.htm"
+    },
+    "Mesa Verde": {
+      "State": "Colorado",
+      "Latitude": 37.230205,
+      "Longitude": -108.462031,
+      "Date_Established": "June 29, 1906",
+      "Area": 212.4,
+      "Visitors": "556,203",
+      "Website": "https://www.nps.gov/meve/index.htm"
+    },
+    "Rocky Mountain": {
+      "State": "Colorado",
+      "Latitude": 40.326351,
+      "Longitude": -105.690322,
+      "Date_Established": "January 26, 1915",
+      "Area": "1,075.7",
+      "Visitors": "4,670,053",
+      "Website": "https://www.nps.gov/romo/index.htm"
+    },
+    "Biscayne": {
+      "State": "Florida",
+      "Latitude": 25.48173,
+      "Longitude": -80.207899,
+      "Date_Established": "June 28, 1980",
+      "Area": 700,
+      "Visitors": "708,522",
+      "Website": "https://www.nps.gov/bisc/index.htm"
+    },
+    "Dry Tortugas": {
+      "State": "Florida",
+      "Latitude": 24.628386,
+      "Longitude": -82.873311,
+      "Date_Established": "October 26, 1992",
+      "Area": 261.8,
+      "Visitors": "79,200",
+      "Website": "https://www.nps.gov/drto/index.htm"
+    },
+    "Everglades": {
+      "State": "Florida",
+      "Latitude": 25.304263,
+      "Longitude": -80.900241,
+      "Date_Established": "May 30, 1934",
+      "Area": "6,106.5",
+      "Visitors": "1,118,300",
+      "Website": "https://www.nps.gov/ever/index.htm"
+    },
+    "Haleakalā": {
+      "State": "Hawaii",
+      "Latitude": 20.718232,
+      "Longitude": -156.146735,
+      "Date_Established": "July 1, 1961",
+      "Area": 134.6,
+      "Visitors": "994,394",
+      "Website": "https://www.nps.gov/hale/index.htm"
+    },
+    "Hawai’i Volcanoes": {
+      "State": "Hawaii",
+      "Latitude": 19.383153,
+      "Longitude": -155.279313,
+      "Date_Established": "August 1, 1916",
+      "Area": "1,317.7",
+      "Visitors": "1,368,376",
+      "Website": "https://www.nps.gov/havo/index.htm"
+    },
+    "Indiana Dunes": {
+      "State": "Indiana",
+      "Latitude": 41.650323,
+      "Longitude": -87.071028,
+      "Date_Established": "February 15, 2019",
+      "Area": 62.1,
+      "Visitors": "2,134,285",
+      "Website": "https://www.nps.gov/indu/index.htm"
+    },
+    "Mammoth Cave": {
+      "State": "Kentucky",
+      "Latitude": 37.186302,
+      "Longitude": -86.144744,
+      "Date_Established": "July 1, 1941",
+      "Area": 218.6,
+      "Visitors": "551,590",
+      "Website": "https://www.nps.gov/maca/index.htm"
+    },
+    "Acadia": {
+      "State": "Maine",
+      "Latitude": 44.33181,
+      "Longitude": -68.280357,
+      "Date_Established": "February 26, 1919",
+      "Area": 198.6,
+      "Visitors": "3,437,286",
+      "Website": "https://www.nps.gov/acad/index.htm"
+    },
+    "Isle Royale": {
+      "State": "Michigan",
+      "Latitude": 47.990392,
+      "Longitude": -88.909865,
+      "Date_Established": "April 3, 1940",
+      "Area": "2,314.0",
+      "Visitors": "26,410",
+      "Website": "https://www.nps.gov/isro/index.htm"
+    },
+    "Voyageurs": {
+      "State": "Minnesota",
+      "Latitude": 48.472239,
+      "Longitude": -92.849365,
+      "Date_Established": "April 8, 1975",
+      "Area": 883.1,
+      "Visitors": "232,974",
+      "Website": "https://www.nps.gov/voya/index.htm"
+    },
+    "Gateway Arch": {
+      "State": "Missouri",
+      "Latitude": 38.627435,
+      "Longitude": -90.183765,
+      "Date_Established": "February 22, 2018",
+      "Area": 0.8,
+      "Visitors": "2,055,309",
+      "Website": "https://www.nps.gov/jeff/index.htm"
+    },
+    "Glacier": {
+      "State": "Montana",
+      "Latitude": 48.756214,
+      "Longitude": -113.807752,
+      "Date_Established": "May 11, 1910",
+      "Area": "4,100.0",
+      "Visitors": "3,049,839",
+      "Website": "https://www.nps.gov/glac/index.htm"
+    },
+    "Great Basin": {
+      "State": "Nevada",
+      "Latitude": 38.925082,
+      "Longitude": -114.260352,
+      "Date_Established": "October 27, 1986",
+      "Area": 312.3,
+      "Visitors": "131,802",
+      "Website": "https://www.nps.gov/grba/index.htm"
+    },
+    "Carlsbad Caverns": {
+      "State": "New Mexico",
+      "Latitude": 32.132738,
+      "Longitude": -104.554665,
+      "Date_Established": "May 14, 1930",
+      "Area": 189.3,
+      "Visitors": "440,691",
+      "Website": "https://www.nps.gov/cave/index.htm"
+    },
+    "White Sands": {
+      "State": "New Mexico",
+      "Latitude": 32.785165,
+      "Longitude": -106.326552,
+      "Date_Established": "December 20, 2019",
+      "Area": 592.2,
+      "Visitors": "608,785",
+      "Website": "https://www.nps.gov/whsa/index.htm"
+    },
+    "Great Smoky Mountains": {
+      "State": "North Carolina",
+      "Latitude": 35.611057,
+      "Longitude": -83.56161,
+      "Date_Established": "June 15, 1934",
+      "Area": "2,114.2",
+      "Visitors": "12,547,743",
+      "Website": "https://www.nps.gov/grsm/index.htm"
+    },
+    "Theodore Roosevelt": {
+      "State": "North Dakota",
+      "Latitude": 46.972703,
+      "Longitude": -103.536939,
+      "Date_Established": "November 10, 1978",
+      "Area": 285.1,
+      "Visitors": "691,658",
+      "Website": "https://www.nps.gov/thro/index.htm"
+    },
+    "Cuyahoga Valley": {
+      "State": "Ohio",
+      "Latitude": 41.277865,
+      "Longitude": -81.572164,
+      "Date_Established": "October 11, 2000",
+      "Area": 131.8,
+      "Visitors": "2,237,997",
+      "Website": "https://www.nps.gov/cuva/index.htm"
+    },
+    "Crater Lake": {
+      "State": "Oregon",
+      "Latitude": 42.937304,
+      "Longitude": -122.110759,
+      "Date_Established": "May 22, 1902",
+      "Area": 741.5,
+      "Visitors": "704,512",
+      "Website": "https://www.nps.gov/crla/index.htm"
+    },
+    "Congaree": {
+      "State": "South Carolina",
+      "Latitude": 33.793179,
+      "Longitude": -80.779091,
+      "Date_Established": "November 10, 2003",
+      "Area": 107.1,
+      "Visitors": "159,445",
+      "Website": "https://www.nps.gov/cong/index.htm"
+    },
+    "Badlands": {
+      "State": "South Dakota",
+      "Latitude": 43.854575,
+      "Longitude": -102.330352,
+      "Date_Established": "November 10, 1978",
+      "Area": 982.4,
+      "Visitors": "970,998",
+      "Website": "https://www.nps.gov/badl/index.htm"
+    },
+    "Wind Cave": {
+      "State": "South Dakota",
+      "Latitude": 43.569522,
+      "Longitude": -103.447102,
+      "Date_Established": "January 9, 1903",
+      "Area": 137.5,
+      "Visitors": "615,350",
+      "Website": "https://www.nps.gov/wica/index.htm"
+    },
+    "Big Bend": {
+      "State": "Texas",
+      "Latitude": 29.268405,
+      "Longitude": -103.276525,
+      "Date_Established": "June 12, 1944",
+      "Area": "3,242.2",
+      "Visitors": "463,832",
+      "Website": "https://www.nps.gov/bibe/index.htm"
+    },
+    "Guadalupe Mountains": {
+      "State": "Texas",
+      "Latitude": 31.935124,
+      "Longitude": -104.857748,
+      "Date_Established": "October 15, 1966",
+      "Area": 349.5,
+      "Visitors": "188,833",
+      "Website": "https://www.nps.gov/gumo/index.htm"
+    },
+    "Virgin Islands": {
+      "State": "US Virgin Islands",
+      "Latitude": 18.342059,
+      "Longitude": -64.74806,
+      "Date_Established": "August 2, 1956",
+      "Area": 60.9,
+      "Visitors": "133,398",
+      "Website": "https://www.nps.gov/viis/index.htm"
+    },
+    "Arches": {
+      "State": "Utah",
+      "Latitude": 38.726212,
+      "Longitude": -109.607727,
+      "Date_Established": "November 12, 1971",
+      "Area": 310.3,
+      "Visitors": "1,659,702",
+      "Website": "https://www.nps.gov/arch/index.htm"
+    },
+    "Bryce Canyon": {
+      "State": "Utah",
+      "Latitude": 37.593496,
+      "Longitude": -112.189529,
+      "Date_Established": "February 25, 1928",
+      "Area": 145,
+      "Visitors": "2,594,904",
+      "Website": "https://www.nps.gov/brca/index.htm"
+    },
+    "Canyonlands": {
+      "State": "Utah",
+      "Latitude": 38.208358,
+      "Longitude": -109.91993,
+      "Date_Established": "September 12, 1964",
+      "Area": "1,366.2",
+      "Visitors": "733,996",
+      "Website": "https://www.nps.gov/cany/index.htm"
+    },
+    "Capitol Reef": {
+      "State": "Utah",
+      "Latitude": 38.074589,
+      "Longitude": -111.127815,
+      "Date_Established": "December 18, 1971",
+      "Area": 979,
+      "Visitors": "1,226,519",
+      "Website": "https://www.nps.gov/care/index.htm"
+    },
+    "Zion": {
+      "State": "Utah",
+      "Latitude": 37.294454,
+      "Longitude": -113.028158,
+      "Date_Established": "November 19, 1919",
+      "Area": 595.9,
+      "Visitors": "4,488,268",
+      "Website": "https://www.nps.gov/zion/index.htm"
+    },
+    "Shenandoah": {
+      "State": "Virginia",
+      "Latitude": 38.470271,
+      "Longitude": -78.456351,
+      "Date_Established": "December 26, 1935",
+      "Area": 806.2,
+      "Visitors": "1,425,507",
+      "Website": "https://www.nps.gov/shen/index.htm"
+    },
+    "Mount Rainier": {
+      "State": "Washington",
+      "Latitude": 46.874788,
+      "Longitude": -121.731428,
+      "Date_Established": "March 2, 1899",
+      "Area": 956.6,
+      "Visitors": "1,501,621",
+      "Website": "https://www.nps.gov/mora/index.htm"
+    },
+    "North Cascades": {
+      "State": "Washington",
+      "Latitude": 48.766927,
+      "Longitude": -121.322447,
+      "Date_Established": "October 2, 1968",
+      "Area": "2,042.8",
+      "Visitors": "38,208",
+      "Website": "https://www.nps.gov/noca/index.htm"
+    },
+    "Olympic": {
+      "State": "Washington",
+      "Latitude": 47.791411,
+      "Longitude": -123.607594,
+      "Date_Established": "June 29, 1938",
+      "Area": "3,733.8",
+      "Visitors": "3,245,806",
+      "Website": "https://www.nps.gov/olym/index.htm"
+    },
+    "New River Gorge": {
+      "State": "West Virginia",
+      "Latitude": 37.874744,
+      "Longitude": -81.020216,
+      "Date_Established": "December 27, 2020",
+      "Area": 28.4,
+      "Visitors": "-",
+      "Website": "https://www.nps.gov/neri/index.htm"
+    },
+    "Grand Teton": {
+      "State": "Wyoming",
+      "Latitude": 43.778551,
+      "Longitude": -110.691364,
+      "Date_Established": "February 26, 1929",
+      "Area": "1,254.7",
+      "Visitors": "3,405,614",
+      "Website": "https://www.nps.gov/grte/index.htm"
+    },
+    "Yellowstone": {
+      "State": "Wyoming",
+      "Latitude": 44.631155,
+      "Longitude": -110.657269,
+      "Date_Established": "March 1, 1872",
+      "Area": "8,983.2",
+      "Visitors": "4,020,288",
+      "Website": "https://www.nps.gov/yell/index.htm"
+    }
+  }

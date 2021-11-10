@@ -2,6 +2,17 @@
 // https://elias-trip-planner.herokuapp.com/
 import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
 
+// Personal Ignore 
+window.addEventListener('load', function(event){
+    let nav1 = document.getElementById("1");
+    let nav2 = document.getElementById("2");
+    let nav3 = document.getElementById("3");
+    nav1.setAttribute("class", "nav-link")
+    nav2.setAttribute("class", "nav-link")
+    nav3.setAttribute("class", "nav-link active")
+})
+//
+
 function drawMap(maplibregl){
     const mapTilerKey = "b1f46c812f0f4a7485e46c797622ab4a"    
     const map = new maplibregl.Map({
@@ -36,7 +47,7 @@ var addresses =
 // are going to hardcode it
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
-    req.open("POST","https://elias-trip-planner.herokuapp.com/getCoord",true);
+    req.open("POST","/getCoord",true);
     req.setRequestHeader("Content-Type","application/json")
     req.addEventListener("load", function(){
         if (req.status >= 200 && req.status < 400){
