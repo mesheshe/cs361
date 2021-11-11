@@ -1,13 +1,11 @@
-import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
+let nav1 = document.getElementById("1");
+let nav2 = document.getElementById("2");
+let nav3 = document.getElementById("3");
+nav1.setAttribute("class", "nav-link")
+nav2.setAttribute("class", "nav-link active")
+nav3.setAttribute("class", "nav-link")
 
-window.addEventListener('load', function(event){
-    let nav1 = document.getElementById("1");
-    let nav2 = document.getElementById("2");
-    let nav3 = document.getElementById("3");
-    nav1.setAttribute("class", "nav-link")
-    nav2.setAttribute("class", "nav-link active")
-    nav3.setAttribute("class", "nav-link")
-})
+import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
 
 
 function drawMap(maplibregl){
@@ -41,9 +39,9 @@ tab4.addEventListener("click", function(event){
     tab6.setAttribute("class","nav-link")
     let id = parseInt(event.target.getAttribute('id'));
     containers[0].style.display = 'none';
+    containers[1].style.display = 'none';
     containers[2].style.display = 'none';
-    containers[3].style.display = 'none';
-    containers[id-3].style.display = 'block';
+    containers[id-3-1].style.display = 'block';
 })
 tab5.addEventListener("click", function(event){
     tab4.setAttribute("class","nav-link")
@@ -53,7 +51,7 @@ tab5.addEventListener("click", function(event){
     containers[0].style.display = 'none';
     containers[1].style.display = 'none';
     containers[2].style.display = 'none';
-    containers[id-3].style.display = 'block';
+    containers[id-3-1].style.display = 'block';
 })
 tab6.addEventListener("click", function(event){
     tab4.setAttribute("class","nav-link")
@@ -63,7 +61,7 @@ tab6.addEventListener("click", function(event){
     containers[0].style.display = 'none';
     containers[1].style.display = 'none';
     containers[2].style.display = 'none';
-    containers[id-3].style.display = 'block';
+    containers[id-3-1].style.display = 'block';
 })
 tab7.addEventListener("click", function(event){
     tab7.setAttribute("class","nav-link active")
@@ -91,16 +89,16 @@ sub.addEventListener("click", function(event){
     var to  = {};
     var from = {};
     var req = new XMLHttpRequest();
-    var payload = {to:null, from:null};
+    var payload = {};
     if (tos.value != ""){
-        payload.to = tos.value;
+        payload.tos = tos.value;
     }else{
         to.city = "Seattle";
         to.state = "WA";
         payload.to = to;    
     }
     if (froms.value != ""){
-        payload.from = froms.value;
+        payload.froms = froms.value;
     }else{
         from.city = "Los Angles";
         from.state = "CA";
@@ -125,7 +123,7 @@ sub.addEventListener("click", function(event){
 });
 
 async function populatePark(){
-    const response = await fetch('https://flip2.engr.oregonstate.edu:8050/all');
+    const response = await fetch('http://flip2.engr.oregonstate.edu:8050/all');
     const parkData = await response.json();
     // Filter the list 
     let container = document.getElementsByClassName('containers');

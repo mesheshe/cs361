@@ -121,7 +121,7 @@ function addMarkerFromLonLatArr(arr){
     
 }
 
-/*
+
 sub.addEventListener("click", function(event){
     var req = new XMLHttpRequest();
     req.open("POST","/getRoutes",true);
@@ -187,7 +187,7 @@ function buildCoord(data){
       }
     });
 }
-*/
+
 
 
 

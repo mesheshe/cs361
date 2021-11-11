@@ -40,12 +40,21 @@ app.post('/getRoutes', function(req,res){
 
 app.post('/getMaps', function(req,res){
   var payload = {};
-  fetch(`https://api.geoapify.com/v1/geocode/search?text=${req.body.to.city} ${req.body.to.state} US&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a`)
+  let to = "Seattle, WA";
+  let from = "Los Angeles, CA";
+  if (!(req.body.hasOwnProperty('tos'))){
+    to = req.body.to.city + ' '+ req.body.to.state;
+    from = req.body.from.city + ' '+ req.body.from.state;
+  }else{
+    to = req.body.tos;
+    from = req.body.froms;
+  } 
+  fetch(`https://api.geoapify.com/v1/geocode/search?text=${to} US&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a`)
   .then(function(resp){
     if (resp.ok){return resp.json()}else{return Promise.reject(resp)} 
   }).then(function (results){
     payload.to = results;
-    return fetch(`https://api.geoapify.com/v1/geocode/search?text=${req.body.from.city} ${req.body.from.state} US&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a`)
+    return fetch(`https://api.geoapify.com/v1/geocode/search?text=${from} US&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a`)
   }).then(function(resp){
     if (resp.ok){return resp.json()}else{return Promise.reject(resp)} 
   }).then(function (results){
