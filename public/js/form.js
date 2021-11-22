@@ -26,7 +26,8 @@ function drawMap(maplibregl){
 
 var map = drawMap(maplibregl);
 let bounds = new maplibregl.LngLatBounds(); // defines the bounds
-
+let route = [];
+let BOUNDARY = 3; // Map boundary 
 let tab4 = document.getElementById("4");
 let tab5 = document.getElementById("5");
 let tab6 = document.getElementById("6");
@@ -128,40 +129,66 @@ async function populatePark(){
     // Filter the list 
     let container = document.getElementsByClassName('containers');
     container = container[3]; 
+    checkBoundary("hello")
     for (const key in parkData){
-        let card = document.createElement("div");
-        let cardBody = document.createElement('cardBody');
-        let tabContent = document.createElement('tabContent');
-        let header = document.createElement('h3');
-        header.textContent = key;
-        let content = document.createElement('p');
-        let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-primary');
-        button.textContent = 'Place Marker';
-        button.addEventListener('click', function(event){
-            addMarkerFromLonLatArr([[parkData[key].Longitude, parkData[key].Latitude]], [key])
-            document.getElementById('my-map').scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-        })
-        content.innerHTML = 
-        `${key} is located at ${parkData[key].State} at longitude ${parkData[key].Longitude} and latitude ${parkData[key].Latitude}. <br>`+
-        `This park was established in ${parkData[key].Date_Established} covering an area of ${parkData[key].Area} km^2, with a yearly visitors <br>`+
-        `count of ${parkData[key].Visitors}. For more info, visit <a target="_blank" href ="${parkData[key].Website}">here</a>.`;
-        card.setAttribute('class', 'card');
-        cardBody.setAttribute('class', 'card-body');
-        tabContent.setAttribute('class','tabcontent');
-        tabContent.appendChild(header);
-        tabContent.appendChild(content);
-        tabContent.appendChild(button);
-        cardBody.appendChild(tabContent)
-        card.appendChild(cardBody)
-        container.appendChild(card)
-        let breakLine = document.createElement('br');
-        container.appendChild(breakLine);        
+        if (checkBoundary([parkData[key].Longitude, parkData[key].Latitude])){
+            createCard(key, parkData, container)
+        }
     }
 }
 
+function createCardElements(){
+    let card = document.createElement("div");
+    let cardBody = document.createElement('cardBody');
+    let tabContent = document.createElement('tabContent');
+    let header = document.createElement('h3');
+    let content = document.createElement('p');
+    let button = document.createElement('button');
+    let obj = {card:card,cardBody:cardBody, tabContent:tabContent, header:header, content:content, button: button}
+    return obj 
+}
+
+function fillOutCardElements(key, parkData, obj){
+    obj.header.textContent = key;
+    obj.button.setAttribute('class', 'btn btn-primary');
+    obj.button.textContent = 'Place Marker';
+    obj.button.addEventListener('click', function(event){
+        addMarkerFromLonLatArr([[parkData[key].Longitude, parkData[key].Latitude]], [key])
+        document.getElementById('my-map').scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+    })
+    obj.content.innerHTML = 
+    `${key} is located at ${parkData[key].State} at longitude ${parkData[key].Longitude} and latitude ${parkData[key].Latitude}. <br>`+
+    `This park was established in ${parkData[key].Date_Established} covering an area of ${parkData[key].Area} km^2, with a yearly visitors <br>`+
+    `count of ${parkData[key].Visitors}. For more info, visit <a target="_blank" href ="${parkData[key].Website}">here</a>.`;
+    obj.card.setAttribute('class', 'card');
+    obj.cardBody.setAttribute('class', 'card-body');
+    obj.tabContent.setAttribute('class','tabcontent');
+    return obj
+}
+
+function createCard(key, parkData, container){
+    let obj = createCardElements()
+    let newObj = fillOutCardElements(key, parkData, obj)
+    newObj.tabContent.appendChild(newObj.header);
+    newObj.tabContent.appendChild(newObj.content);
+    newObj.tabContent.appendChild(newObj.button);
+    newObj.cardBody.appendChild(newObj.tabContent)
+    newObj.card.appendChild(newObj.cardBody)
+    container.appendChild(newObj.card)
+    container.appendChild(document.createElement('br'));
+}
+
+function checkBoundary(data){
+    for (let i = 0; i < route.length; i++){
+        if (Math.abs(route[i][0] - data[0]) < BOUNDARY && Math.abs(route[i][1] - data[1] < BOUNDARY)){
+            return true;
+        }
+    }
+    return false;
+}
+
 function buildCoord(data){
-    var route = []
+    route = []
     var storage = data.features[0].geometry.coordinates;
     for (var i = 0; i < storage.length; i++){
         for (var j = 0; j < storage[i].length; j++){
