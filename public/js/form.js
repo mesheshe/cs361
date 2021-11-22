@@ -1,6 +1,5 @@
 import maplibregl from 'https://cdn.skypack.dev/maplibre-gl@2.0.0-pre.5';
 
-
 function drawMap(maplibregl){
     const mapTilerKey = "b1f46c812f0f4a7485e46c797622ab4a"    
     const map = new maplibregl.Map({
@@ -24,41 +23,33 @@ let BOUNDARY = 3; // Map boundary
 
 var sub = document.getElementById("submit1");
 
-sub.addEventListener("click", function(event){
+function getPayload(){
     var tos = document.getElementById("to");
     var froms = document.getElementById("from");
-    var to  = {};
-    var from = {};
-    var req = new XMLHttpRequest();
     var payload = {};
     if (tos.value != ""){
         payload.tos = tos.value;
-    }else{
-        to.city = "Seattle";
-        to.state = "WA";
-        payload.to = to;    
-    }
+    }else{ return null; }
     if (froms.value != ""){
         payload.froms = froms.value;
-    }else{
-        from.city = "Los Angles";
-        from.state = "CA";
-        payload.from = from;
+    }else{ return null; }
+    return payload;
+}
+
+sub.addEventListener("click", function(event){
+    let payload = getPayload();
+    if (payload != null){
+        var req = new XMLHttpRequest();
+        req.open("POST","/getMaps",true);
+        req.setRequestHeader("Content-Type","application/json")
+        req.addEventListener("load", function(){
+            if (req.status >= 200 && req.status < 400){
+                buildCoord(JSON.parse(req.responseText));
+                populatePark();
+            }else{alert("Error: Invalid Submission")}
+        })
+        req.send(JSON.stringify(payload));
     }
-    req.open("POST","/getMaps",true);
-    req.setRequestHeader("Content-Type","application/json")
-    req.addEventListener("load", function(){
-        if (req.status >= 200 && req.status < 400){
-            var response = JSON.parse(req.responseText);
-            console.log(response);
-            buildCoord(response);
-            populatePark();
-        }else{
-            alert("Error: Invalid Submission")
-        }
-    })
-    //console.log(payload);
-    req.send(JSON.stringify(payload));
     event.preventDefault();
     
 });
