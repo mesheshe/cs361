@@ -1,24 +1,61 @@
-function openTab(event, opt){
-    var i, tabcontent, tabs, starts, ends;
-    tabcontent = document.getElementsByClassName('tabcontent');
-    tabs = document.getElementsByClassName("nav-link");
-    if (event.currentTarget.className == "nav-link active"){return;}
-    if (parseInt(opt) <= 3){
-        starts = 0;
-        ends = 3;
-    }else{
-        starts = 3;
-        ends = tabcontent.length;
-    }
-    for (i = starts; i < ends; i++){
-        tabcontent[i].style.display = "none";
-    }
-    tabcontent[parseInt(opt)-1].style.display = "block";  
-    // We are adding plus 3 because the header also has elements with 
-    // attribute nav-link, therefore need to offset to fix the issue.
-    for (i = starts + 3; i< ends + 3; i++){
-        if (tabs[i].getAttribute("class") == "nav-link active")
-            tabs[i].setAttribute("class", "nav-link");
-    }
-    event.currentTarget.className += " active";
-}
+let nav1 = document.getElementById("1");
+let nav2 = document.getElementById("2");
+let nav3 = document.getElementById("3");
+nav1.setAttribute("class", "nav-link")
+nav2.setAttribute("class", "nav-link active")
+nav3.setAttribute("class", "nav-link")
+
+let tab4 = document.getElementById("4");
+let tab5 = document.getElementById("5");
+let tab6 = document.getElementById("6");
+let tab7 = document.getElementById("7");
+let tab8 = document.getElementById("8");
+let containers = document.getElementsByClassName('containers')
+
+tab4.addEventListener("click", function(event){
+    tab4.setAttribute("class","nav-link active")
+    tab5.setAttribute("class","nav-link")
+    tab6.setAttribute("class","nav-link")
+    let id = parseInt(event.target.getAttribute('id'));
+    containers[0].style.display = 'none';
+    containers[1].style.display = 'none';
+    containers[2].style.display = 'none';
+    containers[id-3-1].style.display = 'block';
+})
+tab5.addEventListener("click", function(event){
+    tab4.setAttribute("class","nav-link")
+    tab5.setAttribute("class","nav-link active")
+    tab6.setAttribute("class","nav-link")
+    let id = parseInt(event.target.getAttribute('id'));
+    containers[0].style.display = 'none';
+    containers[1].style.display = 'none';
+    containers[2].style.display = 'none';
+    containers[id-3-1].style.display = 'block';
+})
+tab6.addEventListener("click", function(event){
+    tab4.setAttribute("class","nav-link")
+    tab5.setAttribute("class","nav-link")
+    tab6.setAttribute("class","nav-link active")
+    let id = parseInt(event.target.getAttribute('id'));
+    containers[0].style.display = 'none';
+    containers[1].style.display = 'none';
+    containers[2].style.display = 'none';
+    containers[id-3-1].style.display = 'block';
+})
+tab7.addEventListener("click", function(event){
+    tab7.setAttribute("class","nav-link active")
+    tab8.setAttribute("class","nav-link")
+    let id = parseInt(event.target.getAttribute('id'));
+    containers[3].style.display = 'none';
+    containers[4].style.display = 'none';
+    containers[id-3-1].style.display = 'block';
+})
+tab8.addEventListener("click", function(event){
+    tab7.setAttribute("class","nav-link")
+    tab8.setAttribute("class","nav-link active")
+    let id = parseInt(event.target.getAttribute('id'));
+    containers[3].style.display = 'none';
+    containers[4].style.display = 'none';
+    console.log(`id - 3 = ${id - 3}` )
+    containers[id-3-1].style.display = 'block';
+})
