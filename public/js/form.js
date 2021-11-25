@@ -45,7 +45,7 @@ sub.addEventListener("click", function(event){
         req.addEventListener("load", function(){
             if (req.status >= 200 && req.status < 400){
                 buildCoord(JSON.parse(req.responseText));
-                populatePark(); test();
+                populatePark(); buildHotel();
             }else{alert("Error: Invalid Submission")}
         })
         req.send(JSON.stringify(payload));
@@ -189,23 +189,31 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
     map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
 }
 
-async function test(){
+function buildHotel(){
+    let start = route[0];
+    let boundary = 5000;
+    for (let i = 0; i < route.length; i = i + 1){
+        if (measure(start[0], start[1], route[i][0],route[i][1]) > boundary){
+            hotelHelper(route[i][0],route[i][1],boundary);
+            start = route[i];
+        }
+    }
+}
+
+async function hotelHelper(lon, lat, radius){
     let container = document.getElementsByClassName('containers')[4];
-    //circle:lon,lat,radiusMeters
-    const response = await fetch('https://api.geoapify.com/v2/places?categories=accommodation.hotel&filter=circle:'+ route[0][0] +','+ route[0][1] +',5000&limit=2&apiKey=b1f46c812f0f4a7485e46c797622ab4a');
+    const response = await fetch('https://api.geoapify.com/v2/places?categories=accommodation.hotel&filter=circle:'+ lon +','+ lat +','+ radius + '&limit=2&apiKey=b1f46c812f0f4a7485e46c797622ab4a');
     const data1 = await response.json();
     let data = data1.features;
     for (let i = 0; i < data.length; i++){
         if (data[i].properties.name !== undefined){
-            // Fixing a bug
             let key = data[i].properties.name;
             let obj  = {}; obj[key] = {Longitude:data[i].properties.lon,Latitude:data[i].properties.lat}
-            let content =  `${key} is located at longitude ${obj[key].Longitude} and latitude ${obj[key].Latitude}`;
+            let content =  `${key} is located at longitude ${obj[key].Longitude} and latitude ${obj[key].Latitude} ` +
+                           `located at ${parseFloat((measure(lon, lat, obj[key].Longitude, obj[key].Latitude)*(1/1609.34))).toFixed(2)} miles from route.`;
             createCard(data[i].properties.name,obj,container,content)
-            console.log();
         }
     }
-    //
 }
 
 
