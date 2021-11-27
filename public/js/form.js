@@ -189,6 +189,12 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
     map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
 }
 
+let sub2 = document.getElementById('submit2');
+sub2.addEventListener(function(event){
+    
+    event.preventDefault()
+});
+
 function buildHotel(){
     let start = route[0];
     let boundary = 5000;
