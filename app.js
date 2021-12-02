@@ -30,7 +30,6 @@ app.get('/recom',function(req, res){
 });
 
 app.post('/getRoutes', function(req,res){
-  console.log("hello")
   fetch('https://api.geoapify.com/v1/routing?waypoints=47.6038321,-122.3300624|47.3826903,-122.2270272&mode=drive&apiKey=b1f46c812f0f4a7485e46c797622ab4a')
     .then(resp => resp.json())
     .then((calculatedRouteGeoJSON) => {
@@ -38,17 +37,11 @@ app.post('/getRoutes', function(req,res){
     });
 })
 
+// This gets routes 
 app.post('/getMaps', function(req,res){
   var payload = {};
-  let to = "Seattle, WA";
-  let from = "Los Angeles, CA";
-  if (!(req.body.hasOwnProperty('tos'))){
-    to = req.body.to.city + ' '+ req.body.to.state;
-    from = req.body.from.city + ' '+ req.body.from.state;
-  }else{
-    to = req.body.tos;
-    from = req.body.froms;
-  } 
+  let to = req.body.to;
+  let from = req.body.from;
   fetch(`https://api.geoapify.com/v1/geocode/search?text=${to} US&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a`)
   .then(function(resp){
     if (resp.ok){return resp.json()}else{return Promise.reject(resp)} 
@@ -69,8 +62,7 @@ app.post('/getMaps', function(req,res){
 
 app.post('/getCoord', function(req, res){
   var payload = {};
-  var data = [];
-  payload.data = data;
+  payload.data = [];
   var firstURL = 'https://api.geoapify.com/v1/geocode/search?text=';
   var lastURL = '&limit=1&format=json&apiKey=b1f46c812f0f4a7485e46c797622ab4a';
   (() => {

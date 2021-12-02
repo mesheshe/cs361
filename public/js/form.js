@@ -21,22 +21,22 @@ let BOUNDARY = 3; // Map boundary
 var sub = document.getElementById("submit1");
 
 function getPayload(){
-    var tos = document.getElementById("to");
-    var froms = document.getElementById("from");
+    var to = document.getElementById("to");
+    var from = document.getElementById("from");
     var payload = {};
-    if (tos.value != ""){
-        payload.tos = tos.value;
-    }else{ return null; }
-    if (froms.value != ""){
-        payload.froms = froms.value;
-    }else{ return null; }
-    return payload;
+    if (to.value == "" || from.value == ""){
+        return null;
+    }else{ 
+        payload.from = from.value;
+        payload.to = to.value;
+        return payload;
+    }
 }
 
 sub.addEventListener("click", function(event){
-    clearEverythingAndBuildMap();
     let payload = getPayload();
     if (payload != null){
+        clearEverythingAndBuildMap();
         var req = new XMLHttpRequest();
         req.open("POST","/getMaps",true);
         req.setRequestHeader("Content-Type","application/json")
@@ -157,7 +157,6 @@ function buildCoord(data){
       }
     });
 }
-
 // [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
 function addMarkerFromLonLatArr(arr, arr2 = false){
     // I kept it in terms of i so if you have another array that 
@@ -193,21 +192,51 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
 }
 
 document.getElementById('submit2').addEventListener("click",function(event){
-    clearEverythingAndBuildMap();
+    var res  = document.getElementById('PlaceOfInterest');
+    if (res.value !== ""){
+        clearEverythingAndBuildMap();
+        var req = new XMLHttpRequest();
+        req.open("POST","/getCoord",true);
+        req.setRequestHeader("Content-Type","application/json")
+        req.addEventListener("load", function(){
+            if (req.status >= 200 && req.status < 400){
+                var response = JSON.parse(req.responseText);
+                dataFromAddressToLonLat(response.data);
+                populatePark(); buildHotel();
+            }else{
+                alert("Error: Invalid Submission")
+            }
+        })
+        var payload = {}
+        payload.list = [res.value];
+        req.send(JSON.stringify(payload));
+    }
     event.preventDefault()
 });
 
 document.getElementById('submit3').addEventListener("click", function(event){
-    clearEverythingAndBuildMap();
     var lon = document.getElementById('Longitude');
     var lat = document.getElementById('Latitude');
-    route = [[parseFloat(lon.value), parseFloat(lat.value)]]
     if (lon.value !== "" && lat.value !== ""){
+        clearEverythingAndBuildMap();
+        route = [[parseFloat(lon.value), parseFloat(lat.value)]]
         addMarkerFromLonLatArr(route);
     }
     populatePark(); buildHotel();
     event.preventDefault();
 });
+
+function dataFromAddressToLonLat(data){
+    var arr = [];
+    data.forEach(datam => {
+        var sub = [];
+        sub.push(datam.lon)
+        sub.push(datam.lat)
+        arr.push(sub);
+    });
+    route = arr
+    addMarkerFromLonLatArr(arr);
+}
 
 function clearEverythingAndBuildMap(){
     let newMap = document.createElement("div");
@@ -259,7 +288,6 @@ async function hotelHelper(lon, lat, radius){
         }
     }
 }
-
 
 function measure(lon1, lat1, lon2, lat2){  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
