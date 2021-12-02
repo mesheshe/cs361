@@ -9,14 +9,11 @@ function drawMap(maplibregl){
     zoom: 2.4
     })
 
-    map.addControl(
-    new maplibregl.GeolocateControl({
-    positionOptions: {enableHighAccuracy: true},
-    }));
+    map.addControl(new maplibregl.NavigationControl());
     return map;
 }
 
-var map = drawMap(maplibregl);
+let map = drawMap(maplibregl);
 let bounds = new maplibregl.LngLatBounds(); // defines the bounds
 let route = [];
 let BOUNDARY = 3; // Map boundary 
@@ -37,6 +34,7 @@ function getPayload(){
 }
 
 sub.addEventListener("click", function(event){
+    clearEverythingAndBuildMap();
     let payload = getPayload();
     if (payload != null){
         var req = new XMLHttpRequest();
@@ -52,13 +50,12 @@ sub.addEventListener("click", function(event){
     }
     event.preventDefault();   
 });
-
+// fix this 
 async function populatePark(){
-    const response = await fetch('http://flip2.engr.oregonstate.edu:8050/all');
+    const response = await fetch('/all');//fetch('http://flip2.engr.oregonstate.edu:8050/all');
     const parkData = await response.json();
     // Filter the list 
-    let container = document.getElementsByClassName('containers');
-    container = container[3]; 
+    let container = document.getElementsByClassName('containers')[3]; 
     checkBoundary("hello")
     for (const key in parkData){
         if (checkBoundary([parkData[key].Longitude, parkData[key].Latitude])){
@@ -186,20 +183,61 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
         icon.onmouseleave = () => iconMarker.togglePopup();
         bounds.extend(arr[i]);
     }
-    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+    if (arr.length == 1){
+        map.setZoom(5);
+        map.setCenter(arr[0]);
+    }else{
+        map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
+    }
+    
 }
 
-let sub2 = document.getElementById('submit2');
-sub2.addEventListener(function(event){
-    
+document.getElementById('submit2').addEventListener("click",function(event){
+    clearEverythingAndBuildMap();
     event.preventDefault()
 });
+
+document.getElementById('submit3').addEventListener("click", function(event){
+    clearEverythingAndBuildMap();
+    var lon = document.getElementById('Longitude');
+    var lat = document.getElementById('Latitude');
+    route = [[parseFloat(lon.value), parseFloat(lat.value)]]
+    if (lon.value !== "" && lat.value !== ""){
+        addMarkerFromLonLatArr(route);
+    }
+    populatePark(); buildHotel();
+    event.preventDefault();
+});
+
+function clearEverythingAndBuildMap(){
+    let newMap = document.createElement("div");
+    let oldMap = document.getElementById('my-map')
+    newMap.setAttribute('id', 'my-map');
+    newMap.setAttribute('class', 'embed-responsive embed-responsive-16by9');
+    oldMap.parentNode.replaceChild(newMap,oldMap)
+    clearParksandHotels();
+    map = drawMap(maplibregl); 
+    bounds = new maplibregl.LngLatBounds();
+}
+
+function clearParksandHotels(){
+    let container1 = document.getElementsByClassName('containers')[3];
+    let container2 = document.getElementsByClassName('containers')[4];
+    removeAllChildNodes(container1);
+    removeAllChildNodes(container2);
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 function buildHotel(){
     let start = route[0];
     let boundary = 5000;
     for (let i = 0; i < route.length; i = i + 1){
-        if (measure(start[0], start[1], route[i][0],route[i][1]) > boundary){
+        if (i === 0 || measure(start[0], start[1], route[i][0],route[i][1]) > boundary){
             hotelHelper(route[i][0],route[i][1],boundary);
             start = route[i];
         }

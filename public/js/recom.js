@@ -80,6 +80,7 @@ function dataFromAddressToLonLat(data){
     });
     addMarkerFromLonLatArr(arr);
 }
+
 // [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
 function addMarkerFromLonLatArr(arr){
     // I kept it in terms of i so if you have another array that 

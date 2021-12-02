@@ -108,7 +108,7 @@ app.post('/getCoord', function(req, res){
 
 //temp
 // Send all parks
-app.get('/all/', sendAll);
+app.get('/all', sendAll);
 
 function sendAll(request, response) {
     response.send(parks);
