@@ -21,12 +21,8 @@ app.get('/', function(req,res){
   res.render('home');
 });
 
-app.get('/form', function(req, res){
-  res.render('form');
-});
-
-app.get('/recom',function(req, res){
-  res.render('recom');
+app.get('/trip', function(req, res){
+  res.render('trip');
 });
 
 app.post('/getRoutes', function(req,res){
