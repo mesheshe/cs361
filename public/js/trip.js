@@ -20,6 +20,7 @@ let BOUNDARY = 3; // Map boundary
 
 var sub = document.getElementById("submit1");
 
+// Gets the data from routes html inputs
 function getPayload(){
     var to = document.getElementById("to");
     var from = document.getElementById("from");
@@ -50,9 +51,9 @@ sub.addEventListener("click", function(event){
     }
     event.preventDefault();   
 });
-// fix this 
+
 async function populatePark(){
-    const response = await fetch('/all');//fetch('http://flip2.engr.oregonstate.edu:8050/all');
+    const response = await fetch('http://flip2.engr.oregonstate.edu:8050/all');
     const parkData = await response.json();
     // Filter the list 
     let container = document.getElementsByClassName('containers')[3]; 
@@ -64,7 +65,7 @@ async function populatePark(){
         }
     }
 }
-
+// Creating the cards for hotels and parks 
 function createCardElements(){
     let card = document.createElement("div");
     let cardBody = document.createElement('cardBody');
@@ -75,7 +76,7 @@ function createCardElements(){
     let obj = {card:card,cardBody:cardBody, tabContent:tabContent, header:header, content:content, button: button}
     return obj 
 }
-
+// puting the data in the cards
 function fillOutCardElements(key, parkData, obj, content){
     obj.header.textContent = key;
     obj.button.setAttribute('class', 'btn btn-primary');
@@ -90,7 +91,7 @@ function fillOutCardElements(key, parkData, obj, content){
     obj.tabContent.setAttribute('class','tabcontent');
     return obj
 }
-
+// create card, fills out card, then makes card visible on the webpage
 function createCard(key, parkData, container, content){
     let obj = createCardElements()
     let newObj = fillOutCardElements(key, parkData, obj, content)
@@ -103,6 +104,9 @@ function createCard(key, parkData, container, content){
     container.appendChild(document.createElement('br'));
 }
 
+// Makes sure the coordinates of the data that is sent in is within 
+// the BOUNDARY limit, set at the top of the page, with the coordinates in
+// route global variable. 
 function checkBoundary(data){
     for (let i = 0; i < route.length; i++){
         if (Math.abs(route[i][0] - data[0]) < BOUNDARY && Math.abs(route[i][1] - data[1] < BOUNDARY)){
@@ -112,6 +116,7 @@ function checkBoundary(data){
     return false;
 }
 
+// From route data build coord
 function buildCoord(data){
     route = []
     var storage = data.features[0].geometry.coordinates;
@@ -123,12 +128,14 @@ function buildCoord(data){
     coordToRouteOnMap(route)
 }
 
+// From coordinates to pushing it on the map
 function coordToRouteOnMap(route){   
     route.forEach(element => bounds.extend(element))
     map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
     addMarkerFromLonLatArr([route[0], route[route.length - 1]])
     addMapLayer(route);
 }
+
 
 function addMapLayer(route){
     map.addLayer({
@@ -147,7 +154,6 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
         let icon = document.createElement('div');
         icon.classList.add("icon");
         icon.setAttribute("id", "icon" + i);
-        // This step above allows you to add event handlers for each icon
         let iconPopup = new maplibregl.Popup({
             anchor: 'bottom',
             offset: [0, -64] // height - shadow
@@ -206,6 +212,8 @@ document.getElementById('submit3').addEventListener("click", function(event){
     event.preventDefault();
 });
 
+// Inner step to convert data recieved from submit2 response 
+// to a list of LonLat. Ignore this function entirely. 
 function dataFromAddressToLonLat(data){
     var arr = [];
     data.forEach(datam => {
@@ -215,9 +223,10 @@ function dataFromAddressToLonLat(data){
         arr.push(sub);
     });
     route = arr
-    addMarkerFromLonLatArr(arr);
+    addMarkerFromLonLatArr(route);
 }
 
+// clears all markers and routes
 function clearEverythingAndBuildMap(){
     let newMap = document.createElement("div");
     let oldMap = document.getElementById('my-map')
@@ -229,6 +238,7 @@ function clearEverythingAndBuildMap(){
     bounds = new maplibregl.LngLatBounds();
 }
 
+// clears all park and hotel data 
 function clearParksandHotels(){
     let container1 = document.getElementsByClassName('containers')[3];
     let container2 = document.getElementsByClassName('containers')[4];
@@ -242,6 +252,7 @@ function removeAllChildNodes(parent) {
     }
 }
 
+// builds hotel data
 function buildHotel(){
     let start = route[0];
     let boundary = 5000;
@@ -269,7 +280,8 @@ async function hotelHelper(lon, lat, radius){
     }
 }
 
-function measure(lon1, lat1, lon2, lat2){  // generally used geo measurement function
+// Used to measure distance between two coordinates 
+function measure(lon1, lat1, lon2, lat2){ 
     var R = 6378.137; // Radius of earth in KM
     var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
