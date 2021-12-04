@@ -117,50 +117,32 @@ function buildCoord(data){
     var storage = data.features[0].geometry.coordinates;
     for (var i = 0; i < storage.length; i++){
         for (var j = 0; j < storage[i].length; j++){
-            if (storage[i][j].length > 0){
-                route.push(storage[i][j]);
-            }
+            if (storage[i][j].length > 0){route.push(storage[i][j]);}
         }
-    }   
+    }
+    coordToRouteOnMap(route)
+}
 
+function coordToRouteOnMap(route){   
     route.forEach(element => bounds.extend(element))
     map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
-    
-    if (map.getLayer('route') != undefined){
-      map.removeLayer('route');
-      map.removeSource('route');
-    }
-    
     addMarkerFromLonLatArr([route[0], route[route.length - 1]])
-
-    map.addLayer({
-      "id": "route",
-      "type": "line", 
-      'layout': {
-          'line-join': 'round',
-          'line-cap': 'round'
-      },
-      'paint': {
-          'line-color': 'black',
-          'line-width': 8
-      },
-      "source": {
-          "type": "geojson",
-          "data": {
-              "type": "Feature",
-              "properties": {},
-              "geometry": {
-                  "type": "LineString",
-                  "coordinates": route
-              }
-          }
-      }
-    });
+    addMapLayer(route);
 }
-// [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
+
+function addMapLayer(route){
+    map.addLayer({
+        "id": "route",
+        "type": "line", 
+        'layout': {'line-join': 'round', 'line-cap': 'round'},
+        'paint': {'line-color': 'black', 'line-width': 8},
+        "source": {"type": "geojson", "data": {"type": "Feature", "properties": {}, "geometry": {"type": "LineString","coordinates": route}}}
+      });
+}
+
+// arr = [[lon_1,lat_1],[lon_2,lat_2]...[lon_i,lat_i]]
+// arr2 = list of names for the coord in arr
 function addMarkerFromLonLatArr(arr, arr2 = false){
-    // I kept it in terms of i so if you have another array that 
-    // has information about said marker you can still reference it
     for (let i = 0; i < arr.length; i++){
         let icon = document.createElement('div');
         icon.classList.add("icon");
@@ -183,11 +165,9 @@ function addMarkerFromLonLatArr(arr, arr2 = false){
         bounds.extend(arr[i]);
     }
     if (arr.length == 1){
-        map.setZoom(5);
         map.setCenter(arr[0]);
-    }else{
-        map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
     }
+    map.fitBounds(bounds,{padding: {top:100, bottom:50, left:25, right:25}});
     
 }
 
