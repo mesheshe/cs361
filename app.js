@@ -1,13 +1,21 @@
-//temp
+//In case teammates service goes down
 const fs = require('fs');
 const data = fs.readFileSync('parks.json');
 const parks = JSON.parse(data);
-//temp
+//
 
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 const fetch = require('node-fetch')
+
+// Setting up cors for API use by client
+const cors = require('cors');
+const corsOptions = {
+    origin: true,
+    credentials: true,
+    optionSuccessStatus: 200
+}
 
 app.set('port', process.env.PORT || 9794);
 
@@ -114,7 +122,9 @@ app.use(function(error,req,res,next){
     res.status(500);
     res.render('500');
 });
-  
-  app.listen(app.get('port'), function(){
-    console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
-  });
+
+app.use(cors());
+
+app.listen(app.get('port'), function(){
+  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+});
