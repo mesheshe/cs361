@@ -33,15 +33,7 @@ app.get('/trip', function(req, res){
   res.render('trip');
 });
 
-app.post('/getRoutes', function(req,res){
-  fetch('https://api.geoapify.com/v1/routing?waypoints=47.6038321,-122.3300624|47.3826903,-122.2270272&mode=drive&apiKey=b1f46c812f0f4a7485e46c797622ab4a')
-    .then(resp => resp.json())
-    .then((calculatedRouteGeoJSON) => {
-      res.send(JSON.stringify(calculatedRouteGeoJSON));
-    });
-})
-
-// This gets routes 
+// This gets routes between two locations 
 app.post('/getMaps', function(req,res){
   var payload = {};
   let to = req.body.to;
@@ -64,6 +56,8 @@ app.post('/getMaps', function(req,res){
   }).catch(err => console.error(err));
 });
 
+// This accepts a list of address of places of interest, and returns a list of objects 
+// with lat and long and name
 app.post('/getCoord', function(req, res){
   var payload = {};
   payload.data = [];
@@ -102,15 +96,12 @@ app.post('/getCoord', function(req, res){
   }
 });
 
-//temp
-// Send all parks
+// Send all parks in case teammates service goes down
 app.get('/all', sendAll);
 
 function sendAll(request, response) {
     response.send(parks);
 }
-//temp
-
 
 app.use(function(req,res){
     res.status(404);
